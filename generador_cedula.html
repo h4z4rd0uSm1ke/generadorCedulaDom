@@ -10,18 +10,22 @@
 
   <p id="#cedula_label">___-_______-_</p>
 
+  <input id="clickMe" type="button" value="clickme" onclick="main()" />
+  
   <script type="text/javascript">
-    var isValid = false
 
     let cedulaLength = 11
     let cedulaMaxNumber = 50000000000
     let exampleValid = "40242589584"
+    var isValid = false
 
-    while (!isValid) {
-      let random = randomNumber()
-      let randomFormatted = this.formatNumber(random)
-
-      this.validateCedula(randomFormatted)
+    function main() {
+      isValid = false
+      while (!isValid) {
+        let random = randomNumber()
+        let randomFormatted = this.formatNumber(random)
+        validateCedula(randomFormatted)
+      }
     }
 
     function randomNumber() {
@@ -41,21 +45,17 @@
 
     function foundValidCedula(cedula) {
       this.isValid = true
-      console.log("CEDULA VALIDA ENCONTRADA! " + cedula)
-
       let elem = document.getElementById('#cedula_label')
       elem.innerHTML = cedula.substring(0, 3) + "-" + cedula.substring(3, 10) + "-" + cedula.charAt(10)
     }
 
     function validateCedula(cedula) {
-      console.log("Probando cédula: " + cedula + "...");
 
         let peso = ["1", "2", "1", "2", "1", "2", "1", "2", "1", "2"]
         var addition = 0
         var lastDigit
 
         if (cedula.length != 11) {
-          console.error("Cédula debe tener 11 carácteres")
           return false;
         }
 
@@ -83,7 +83,6 @@
           foundValidCedula(cedula)
           return true
         } else {
-          console.error("Cédula inválida")
           return false
         }
     }
